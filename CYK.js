@@ -1,3 +1,10 @@
+/**
+ * @returns {JSON} a clone to the object's instance
+ */
+Object.prototype.clone = function () {
+    return JSON.parse(JSON.stringify(this));
+};
+
 /** 
  * Implements the CYK algorithm 
  */
@@ -19,6 +26,24 @@ class CYK {
         // the previous values can be returned avoiding recalculations
         this._previousWord;
         this._substrings;
+    }
+
+    /**
+     * @param {String} word - the word to get the substrings from
+     * @returns {Array<String>} all of the word's substrings
+     */
+    _getAllSubstrings(word) {
+        let substrings = [];
+
+        for (let i = 1; i < word.length; i++) {
+            for (let start = 0; start + i <= word.length; start++) {
+                substrings.push(word.substring(start, start + i));
+            }
+        }
+
+        substrings.push(word);
+
+        return substrings;
     }
 
     /**
