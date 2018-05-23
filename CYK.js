@@ -20,4 +20,21 @@ class CYK {
         this._previousWord;
         this._substrings;
     }
+
+    /**
+     * Splits a word into key - value piars where either the key
+     * or the value is at least one character long
+     * @param {String} word - the word to split
+     * @returns {JSON} key - value pairs that when concatenated,
+     * they reconstruct the given word
+     */
+    _splitWord(word) {
+        let splits = {};
+
+        for (let i = 1; i < word.length; i++) {
+            splits[word.substring(0, i)] = word.substring(i, word.length);
+        }
+
+        return splits;
+    }
 }
