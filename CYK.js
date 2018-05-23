@@ -29,6 +29,59 @@ class CYK {
     }
 
     /**
+     * Applies the CYK algorithm for a given word
+     * @param {String} word - the word to apply the CYK algorithm for
+     */
+    _cyk(word) {
+        // If it is the same word as last time
+        if (this._previousWord == word) {
+            // Just use the previous values
+            return;
+        }
+
+        // Use the original rules
+        this._rules = this._originalRules.clone();
+
+        // Get all word's substrings
+        this._substrings = this._getAllSubstrings(word);
+
+        // Skip the single character substrings
+        for (let i = word.length; i < this._substrings.length; i++) {
+            const substring = this._substrings[i];
+            // Split each substring into key - value pairs
+            const substringPair = this._splitWord(substring);
+
+            for (const key in substringPair) {
+                const cartesianProduct = this._cartesianProduct(key, substringPair[key]);
+
+                // Go through all of the elements of the cartesian product
+                for (const element of cartesianProduct) {
+                    // If there is a rule for the element
+                    if (this._rules[element]) {
+                        // If there is no rule for the substring
+                        if (!this._rules[substring]) {
+                            // Create an empty one
+                            this._rules[substring] = [];
+                        }
+
+                        // For each element inside the rule for the cartesianProduct's element
+                        for (const elem of this._rules[element]) {
+                            // If the element was not already added to the rule
+                            if (this._rules[substring].indexOf(elem) == -1) {
+                                // Add it to the rule
+                                this._rules[substring].push(elem);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Remember the last used word
+        this._previousWord = word;
+    }
+
+    /**
      * @param {String} word - the word to get the substrings from
      * @returns {Array<String>} all of the word's substrings
      */
