@@ -29,6 +29,17 @@ class CYK {
     }
 
     /**
+     * @returns a boolean asserting whether the given word is accepted by the given grammar or not
+     * @param {String} word - the word to check
+     */
+    checkWord(word) {
+        this._cyk(word);
+
+        // Is there a rule for our word ?
+        return this._rules[word] !== undefined;
+    }
+
+    /**
      * Applies the CYK algorithm for a given word
      * @param {String} word - the word to apply the CYK algorithm for
      */
