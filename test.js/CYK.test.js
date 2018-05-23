@@ -19,3 +19,25 @@ describe('checkWord', function () {
         expect(cyk.checkWord('aab')).to.equal(true);
     });
 });
+
+describe('getMatrix', function () {
+    it('should return the CYK matrix for the given grammar', function () {
+        expect(cyk.getMatrix('baaba')).to.deep.equal([
+            [["B"], ["A", "C"], ["A", "C"], ["B"], ["A", "C"]],
+            [["A", "S"], ["B"], ["S", "C"], ["A", "S"]],
+            [undefined, ["B"], ["B"]],
+            [undefined, ["S", "C", "A"]],
+            [["S", "A", "C"]]
+        ]);
+        expect(cyk.getMatrix('baa')).to.deep.equal([
+            [["B"], ["A", "C"], ["A", "C"]],
+            [["A", "S"], ["B"]],
+            [undefined]
+        ]);
+        expect(cyk.getMatrix('aab')).to.deep.equal([
+            [["A", "C"], ["A", "C"], ["B"]],
+            [["B"], ["S", "C"]],
+            [["B"]],
+        ]);
+    });
+});
