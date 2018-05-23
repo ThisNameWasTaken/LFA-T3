@@ -62,4 +62,29 @@ class CYK {
 
         return splits;
     }
+
+    /**
+     * @param {String} word1 - product's first word
+     * @param {String} word2 - product's second word
+     * @returns {Array<string>} the cartesian product for the given words
+     */
+    _cartesianProduct(word1, word2) {
+        if (!word1 || !word2) {
+            return [];
+        }
+
+        if (!this._rules[word1] || !this._rules[word2]) {
+            return [];
+        }
+
+        let cartesianProduct = new Set();
+
+        for (const transition1 of this._rules[word1]) {
+            for (const transition2 of this._rules[word2]) {
+                cartesianProduct.add(transition1 + transition2);
+            }
+        }
+
+        return cartesianProduct;
+    }
 }
