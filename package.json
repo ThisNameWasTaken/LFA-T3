@@ -1,0 +1,21 @@
+{
+    "name": "cyk",
+    "version": "1.0.0",
+    "description": "cyk algorithm",
+    "main": "js/CYK.js",
+    "directories": {
+        "test": "test"
+    },
+    "scripts": {
+        "test": "mocha --require babel-polyfill --require babel-register || true"
+    },
+    "author": "Adrian Florin Dinca",
+    "license": "MIT",
+    "devDependencies": {
+        "babel-polyfill": "^6.26.0",
+        "babel-preset-env": "^1.6.1",
+        "babel-register": "^6.26.0",
+        "chai": "^4.1.2",
+        "mocha": "^5.1.1"
+    }
+}
