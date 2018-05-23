@@ -8,7 +8,7 @@ Object.prototype.clone = function () {
 /** 
  * Implements the CYK algorithm 
  */
-class CYK {
+export default class CYK {
     /**
      * @param {JSON} rules - rules which define the grammar
      */
