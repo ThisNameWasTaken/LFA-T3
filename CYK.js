@@ -93,6 +93,35 @@ class CYK {
     }
 
     /**
+     * @param {String} word - the word to apply the CYK algorithm for
+     * @returns {Array<Array<String>>} the CYK matrix for a given word and grammar
+     */
+    getMatrix(word) {
+        this._cyk(word);
+
+        let matrix = [[]];
+
+        let rawLength = word.length;
+        let rawIndex = 0;
+        let columnIndex = 0;
+
+        for (const substring of this._substrings) {
+            matrix[rawIndex].push(this._rules[substring]);
+
+            if (++columnIndex % rawLength == 0) {
+                rawLength--;
+                rawIndex++;
+                columnIndex = 0;
+                matrix.push([]);
+            }
+        }
+
+        matrix.pop();
+
+        return matrix;
+    }
+
+    /**
      * @param {String} word - the word to get the substrings from
      * @returns {Array<String>} all of the word's substrings
      */
